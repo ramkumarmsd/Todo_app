@@ -1,0 +1,29 @@
+{% include 'index.html' %}
+<style>
+#p {
+    padding: 20px;
+    border-radius: 20px;
+    background-color: rgb(191, 192, 192);
+    }
+    </style>
+{% block content %}
+  
+<div class="container" style="margin-top: 60px;" >
+    <div class="col-6 offset-3" id="p" >   
+        <h2 style="text-align: center;font-family: fantasy;">TO-DO APP</h2>
+        <form method="post" action="">
+            {% csrf_token %}        
+            <div class="input-group">
+
+               {{form.as_p}}
+        
+              <span class="input-group-btn">
+              <button class="btn btn-info btn-sm" type="submit">Update Task</button></span>
+            </div>        
+        </form>
+        </div></div>
+
+
+
+       
+{% endblock %}

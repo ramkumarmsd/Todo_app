@@ -1,0 +1,63 @@
+{% include 'index.html' %}
+<style>
+    #p {
+        padding: 20px;
+        border-radius: 20px;
+        background-color: rgb(53, 236, 236);
+        }
+        #h { 
+             box-shadow:2px 2px 3px 2px rgb(255, 255, 255);
+        padding:20px 20px 20px 30px ;
+        background-color: rgb(53, 236, 236);
+        margin: 30px;
+        border-radius: 20px;
+        }       
+</style>
+{% block content %}
+<div class="container" style="margin-top: 20px;margin-bottom: 30px;">
+  <div class="col-6 offset-3" >
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-info">
+    <strong>{{message}}</strong>
+    </div>
+    {% endfor %}
+    {% endif %}  
+  </div>
+</div>   
+
+<div class="container" style="margin-top: 60px;" >
+    <div class="col-6 offset-3" id="p" >   
+    <h2 style="text-align: center;font-family: fantasy;">TO-DO APP</h2>
+    <form method="post" >
+        {% csrf_token %}        
+        <div class="input-group ">
+            {{form.as_p}}      
+          <span class="input-group-btn">
+          <button class="btn btn-dark btn-sm" type="submit">Add Task</button></span>
+        </div>        
+    </form>
+    </div>
+</div>
+        
+{% for data in datas %}
+    <div class="container">
+      <div class="col-5 offset-3">
+        <div class="media" id="h">          
+          <div class="media-body">                 
+            <h6> {{data.title}}</h6>
+            <h6>{{data.time}}</h6>
+            <h6>{{data.text}}</h6>
+            <h6><a class="badge badge-danger" href="deldt/{{data.id}}" role="button">Delete</a>&nbsp<a class="badge badge-dark" href="edit/{{data.id}}">Edit</a></h6>    
+          </div>
+        </div>
+      </div>
+    </div>
+{% endfor %}
+  
+<script>
+    $("document").ready(function(){
+  $(".alert").hide(3000);
+});
+</script>
+{% endblock %}
